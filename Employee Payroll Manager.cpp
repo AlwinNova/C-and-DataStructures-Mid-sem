@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 class Employee {
 protected:
     string id, name;
     double salary;
-
 public:
     Employee(string i, string n, double s) {
         id = i; name = n; salary = s;
@@ -15,32 +13,25 @@ public:
     virtual double calculateSalary() = 0;
     virtual void display() = 0;
 };
-
 class Manager : public Employee {
 public:
     Manager(string i, string n, double s) : Employee(i,n,s) {}
-
-    double calculateSalary() {
+double calculateSalary() {
         double bonus = (salary > 50000) ? 5000 : 0;
         return salary + salary * 0.20 + bonus;
-    }
-
-    void display() {
+}
+void display() {
         cout << name << " (Manager) - Salary: "
              << calculateSalary() << endl;
-    }
+}
 };
-
 class Developer : public Employee {
     int experience;
-
 public:
-    Developer(string i, string n, double s, int e)
-        : Employee(i,n,s) {
+    Developer(string i, string n, double s, int e) : Employee(i,n,s) {
         experience = e;
     }
-
-    double calculateSalary() {
+ double calculateSalary() {
         double rate = 0.10 + 0.02 * experience;
         if (rate > 0.15) rate = 0.15;
         return salary + salary * rate;
